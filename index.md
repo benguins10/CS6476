@@ -27,7 +27,7 @@ To better train our model and capture the varied nature of images in the Valoran
 
 Next, a simple convolutional neural network (CNN) model is constructed using TensorFlow's Keras API, comprising convolutional and pooling layers followed by a flattening layer and a dense layer with sigmoid activation for binary classification. The model is compiled with binary cross-entropy loss and Adam optimizer.
 
-'''python
+```python
 model = tf.keras.models.Sequential([
     tf.keras.layers.Input(shape=(416, 416, 3)),
     tf.keras.layers.Conv2D(64, (3, 3), activation='relu', padding='same'),
@@ -40,7 +40,7 @@ model = tf.keras.models.Sequential([
 
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 model.summary()
-
+```
 
 The training data is then processed, shuffled, and batched. The model is trained using the training dataset for 10 epochs, and training accuracy is evaluated. Similarly, validation accuracy is evaluated using the validation dataset.
 
