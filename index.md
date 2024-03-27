@@ -5,15 +5,19 @@ layout: default
 FORMAt
 
 
-# Project Proposal
+# Project Update
 
-## Introduction/Background
-The surge in user-generated content on online platforms, particularly YouTube, has brought forth a rise in hate speech and negativity. Our proposal focuses on sentiment analysis of YouTube comments, aiming to mitigate harmful content and gain insights into user opinions for a healthier online environment.
+## Introduction/Problem Definition
+Detecting and localizing objects and body parts within images is a fundamental task in computer vision with numerous applications ranging from autonomous vehicles to medical imaging. In the context of esports, particularly in games like Valorant, the ability to accurately identify and track objects and body parts in screenshots can significantly enhance gameplay analysis, player performance evaluation, and content creation. Our project aims to address this challenge by developing a model specifically tailored for detecting various objects and body parts within Valorant screenshots. 
 
-Paper [[7]](#7)[[9]](#9) talk about
+Valorant, a popular tactical first-person shooter game developed by Riot Games, features complex environments and dynamic gameplay scenarios where precise object and body part detection can provide valuable insights. For instance, being able to accurately identify the positions of characters, weapons, and key body parts such as heads and hands can aid in analyzing player strategies, assessing aim accuracy, and generating engaging content for the gaming community. Moreover, with the increasing popularity of esports and the growing demand for data-driven insights in gaming, the development of robust object detection models tailored to specific game contexts presents an exciting opportunity to bridge the gap between computer vision research and esports analytics. Below is a picture of a typical gunfight in Valorant and an example of what our labeling and detection should look like.
+
+
+<img1>
 
 ## Problem Definition
 
+Paper [[7]](#7)[[9]](#9) talk about
 
 ## Methods
 
