@@ -12,7 +12,7 @@ Detecting and localizing objects and body parts within images is a fundamental t
 
 Valorant, a popular tactical first-person shooter game developed by Riot Games, features complex environments and dynamic gameplay scenarios where precise object and body part detection can provide valuable insights. For instance, being able to accurately identify the positions of characters, weapons, and key body parts such as heads and hands can aid in analyzing player strategies, assessing aim accuracy, and generating engaging content for the gaming community. Moreover, with the increasing popularity of esports and the growing demand for data-driven insights in gaming, the development of robust object detection models tailored to specific game contexts presents an exciting opportunity to bridge the gap between computer vision research and esports analytics. Below is a picture of a typical gunfight in Valorant and an example of what our labeling and detection should look like.
 
-[img1](img1.png)
+![img1](img1.png)
 
 By leveraging machine learning techniques and Valorant screenshots, our project endeavors to contribute to this burgeoning field by creating a model that not only accurately detects objects and body parts but also enhances the overall gaming experience for players and spectators alike.
 
@@ -30,16 +30,16 @@ To better train our model and capture the varied nature of images in the Valoran
 
 Next, a simple convolutional neural network (CNN) model is constructed using TensorFlow's Keras API, comprising convolutional and pooling layers followed by a flattening layer and a dense layer with sigmoid activation for binary classification. The model is compiled with binary cross-entropy loss and Adam optimizer.
 
-[img2](img2.png)
+![img2](img2.png)
 
 The training data is then processed, shuffled, and batched. The model is trained using the training dataset for 10 epochs, and training accuracy is evaluated. Similarly, validation accuracy is evaluated using the validation dataset.
 
 ## Experiments/Results
 For the training of the model, we decided on having the model answer a simple question: whether there exists a head in the image or not. This turns the problem into a binary classification problem, and we designed a model around that. We use a single convolution layer, and a single linear layer. Between the two layers we had a max pool, flatten, and dropout layer to transform the data and help with overfitting. Based on the results during, it seemed as though the model was overfitting on the training data. However, the accuracy on the validation set was 0.9596, indicating that overfitting was not a big issue. Moving forward, we hope to expand on the capabilities of the model past a simple binary classification problem.
 
-[img3](img3.png)
+![img3](img3.png)
 
-[img4](img4.png)
+![img4](img4.png)
 
 ## What's Next
 Our plan is to continue with our created model and significantly improve its robustness and the attributes that it can identify. This will be done by adding attributes by hand to the dataset and fixing any overfitting or accuracy issues that might occur. Once this is done and our model is similarly effective to pre-existing models (by some margin) we will move onto pre trained image detection models to learn more about how they can be implemented to our dataset and to overall learn more about generalizability of CNN pipelines.  
@@ -48,10 +48,10 @@ In addition to model changes, we hope to create many more augmentations on our d
 
 ## References
 1.	<a name="1">X. Ge, J. Renz and P. Zhang, "Visual Detection of Unknown Objects in Video Games Using Qualitative Stability Analysis," in IEEE Transactions on Computational Intelligence and AI in Games, vol. 8, no. 2, pp. 166-177, June 2016, doi: 10.1109/TCIAIG.2015.2506741.</a>
-2.	<a name="2">M. Jung, H. Yang, and K. Min, “Improving deep object detection algorithms for game scenes,” MDPI. [Link](https://www.mdpi.com/2079-9292/10/20/2527#:~:text=An%20interesting%20approach%20for%20improving,Pascal%20VOC%20or%20MS%20COCO)</a>
-3.	<a name="3">C. Erdelyi, “Using computer vision techniques to play an existing video game,” ScholarWorks. [Link](https://scholarworks.calstate.edu/concern/theses/mg74qm41f)</a>
-4.	<a name="4">C. Koray, “A computer vision system for chess game tracking,” 21st Computer Vision Winter Workshop. [Link](https://vision.fe.uni-lj.si/cvww2016/proceedings/papers/21.pdf)</a>
-5.	<a name="5">Alcheeee, “Alcheeee/valorant-object-detection: Object detection in valorant with Yolo Models,” GitHub. [Link](https://github.com/alcheeee/Valorant-Object-Detection)</a>
+2.	<a name="2">M. Jung, H. Yang, and K. Min, “Improving deep object detection algorithms for game scenes,” MDPI. ([Link])(https://www.mdpi.com/2079-9292/10/20/2527#:~:text=An%20interesting%20approach%20for%20improving,Pascal%20VOC%20or%20MS%20COCO)</a>
+3.	<a name="3">C. Erdelyi, “Using computer vision techniques to play an existing video game,” ScholarWorks. ([Link])(https://scholarworks.calstate.edu/concern/theses/mg74qm41f)</a>
+4.	<a name="4">C. Koray, “A computer vision system for chess game tracking,” 21st Computer Vision Winter Workshop. ([Link])(https://vision.fe.uni-lj.si/cvww2016/proceedings/papers/21.pdf)</a>
+5.	<a name="5">Alcheeee, “Alcheeee/valorant-object-detection: Object detection in valorant with Yolo Models,” GitHub. ([Link])(https://github.com/alcheeee/Valorant-Object-Detection)</a>
 
 ## Team Member Contributions
 
