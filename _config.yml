@@ -1,6 +1,8 @@
 title: Valorant Object Detection
 description: CS6476 Course Project (Team 21)
 show_downloads: false
-is_project_page: false
 google_analytics:
 theme: jekyll-theme-cayman
+
+github:
+  is_project_page: false
