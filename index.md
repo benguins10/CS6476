@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Project Update
+# Valorant Object Detection
 
 ## Introduction/Problem Definition
 Detecting and localizing objects and body parts within images is a fundamental task in computer vision with numerous applications ranging from autonomous vehicles to medical imaging. In the context of esports, particularly in games like Valorant, the ability to accurately identify and track objects and body parts in screenshots can significantly enhance gameplay analysis, player performance evaluation, and content creation. Our project aims to address this challenge by developing a model specifically tailored for detecting various objects and body parts within Valorant screenshots. 
