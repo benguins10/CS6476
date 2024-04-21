@@ -23,7 +23,7 @@ First we take the TFRecord dataset and split it into train, test, and validation
 
 To better train our model and capture the varied nature of images in the Valorant environment, a rigorous augmentation procedure was designed to be implemented towards the images during processing. We used the Pillow and OpenCV libraries to perform simple transformations on each image, including greyscaling, hue shifting by random values, and pixelization through downsampling to multiple resolutions and rescaling to the original size. We did not do any rotation or flipping transformations since every image in the game is oriented and there are no current abilities or game effects that could cause a rotation/flip. The goal of these transformations are to produce a more robust training dataset that may account for situations such as varied game settings, different game environments, and general randomness. 
 
-Next, a simple convolutional neural network (CNN) model is constructed using TensorFlow's Keras API, comprising convolutional and pooling layers followed by a flattening layer and a dense layer with sigmoid activation for binary classification. The model is compiled with binary cross-entropy loss and Adam optimizer. After creating many models with different numbers of layers, hyperparameters, and dropouts, we landed on the final <a name="model">model:
+Next, a simple convolutional neural network (CNN) model is constructed using TensorFlow's Keras API, comprising convolutional and pooling layers followed by a flattening layer and a dense layer with sigmoid activation for binary classification. The model is compiled with binary cross-entropy loss and Adam optimizer. After creating many models with different numbers of layers, hyperparameters, and dropouts, we landed on the final <a name="model" style="color:black;">model:
 
 ```python
 model = tf.keras.models.Sequential([
@@ -68,7 +68,7 @@ Prior work in this field that was covered in the introduction hovers at around 8
 <p align="center">
   <img src="red.png" alt="img1">
   <br>
-  <em>Sample highlighted in Yellow</em>
+  <em>Head highlighted in Red</em>
 </p>
 
 The picture is a visual created for the output of our model showing a semi accurate head indicator in this picture from dataset 1.
