@@ -57,7 +57,7 @@ To create our model and test its efficacy, we utilized a dataset of Valorant ima
 <p align="center">
   <img src="pp_yl.png" alt="img1">
   <br>
-  <em>Screenshot with Enemy Body highlighted in Purple and Enemy Head highlighted in Yellow</em>
+  <em>Enemy Body highlighted in Purple and Enemy Head highlighted in Yellow</em>
 </p>
 
 The output of our models will be a loss and an accuracy graph for the models over time as well as a comparison between two models, ours and pre-existing, and the way they compare to an augmented testing dataset that is not connected to our original data. This will help us determine how good our model is in comparison at training and validation and if it is more generalizable. The accuracy metric will be used instead of mIoU because we are only identifying and classifying one object making it feasible. The experiments we will do have already been described in the methods and approach section in depth.
