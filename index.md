@@ -23,9 +23,8 @@ First we take the TFRecord dataset and split it into train, test, and validation
 
 To better train our model and capture the varied nature of images in the Valorant environment, a rigorous augmentation procedure was designed to be implemented towards the images during processing. We used the Pillow and OpenCV libraries to perform simple transformations on each image, including greyscaling, hue shifting by random values, and pixelization through downsampling to multiple resolutions and rescaling to the original size. We did not do any rotation or flipping transformations since every image in the game is oriented and there are no current abilities or game effects that could cause a rotation/flip. The goal of these transformations are to produce a more robust training dataset that may account for situations such as varied game settings, different game environments, and general randomness. 
 
-Next, a simple convolutional neural network (CNN) model is constructed using TensorFlow's Keras API, comprising convolutional and pooling layers followed by a flattening layer and a dense layer with sigmoid activation for binary classification. The model is compiled with binary cross-entropy loss and Adam optimizer.
+Next, a simple convolutional neural network (CNN) model is constructed using TensorFlow's Keras API, comprising convolutional and pooling layers followed by a flattening layer and a dense layer with sigmoid activation for binary classification. The model is compiled with binary cross-entropy loss and Adam optimizer. After creating many models with different numbers of layers, hyperparameters, and dropouts, we landed on the final <a name="model">model:
 
-Snippet of our final model:
 ```python
 model = tf.keras.models.Sequential([
     tf.keras.layers.Input(shape=(416, 416, 3)),
@@ -46,8 +45,6 @@ We decided to use MobileNetV2 as our model as it worked the best out of the hand
 
 Our approach is a contribution to the field as it hopes to improve on the pre-existing model. Instead of having a hyperspecific model that works for only a certain dataset we hope to test and prove that our model can be used of any similarly created dataset once it is converted to tfRecord format.
 
-![img1](ap_pl.png)
-**Approach Pipeline**
 <p align="center">
   <img src="ap_pl.png" alt="img1">
   <br>
@@ -57,31 +54,35 @@ Our approach is a contribution to the field as it hopes to improve on the pre-ex
 ## Experiment Setup
 To create our model and test its efficacy, we utilized a dataset of Valorant images combined with labels for body and head regions [[6]](#6). This user-contributed dataset contains images of size 416 x 416 pixels and label enemy bodies and heads. We utilize the dataset’s split of 1416 training images to train our convolutional neural network to identify the location of labels in each image. Then, a validation set of 103 images is used to evaluate the model at each training step to further improve it. Finally, a testing set of 51 images is used to evaluate the final performance over an unseen set. In all cases, we use the metric of accuracy to measure the efficacy of our model. Our outputs for every image used for prediction include label positions of body and head positions on the enemy in the frame. In addition to the output set from our original dataset of images, we decided to test a distinct set of images to ensure that our model isn't overfit for the particular dataset of images including unique preprocessing or image selection procedures. Our second testing dataset comes from a collection of Valorant images that follows the image size requirements of 416 x 416 along with the labels for bodies and heads of players [[7]](#7).
 
-![img2](pp_yl.png)
-**Valorant Screenshot with Enemy Body highlighted in Purple and Enemy Head highlighted in yellow**
+<p align="center">
+  <img src="pp_yl.png" alt="img1">
+  <br>
+  <em>Screenshot with Enemy Body highlighted in Purple and Enemy Head highlighted in Yellow</em>
+</p>
 
 The output of our models will be a loss and an accuracy graph for the models over time as well as a comparison between two models, ours and pre-existing, and the way they compare to an augmented testing dataset that is not connected to our original data. This will help us determine how good our model is in comparison at training and validation and if it is more generalizable. The accuracy metric will be used instead of mIoU because we are only identifying and classifying one object making it feasible. The experiments we will do have already been described in the methods and approach section in depth.
 
 ## Results
 Prior work in this field that was covered in the introduction hovers at around 86% accuracy and so we aim to reach a similar level of accuracy for our model and have a smaller drop in accuracy when attempting to generalize onto other datasets (the reason we can aim for similar accuracy is because we are aiming for head alone not body). Below is a sample output from our model before we discuss our numerical outputs:
 
-![img3](red.png)
-**Sample Output**
+<p align="center">
+  <img src="red.png" alt="img1">
+  <br>
+  <em>Sample highlighted in Yellow</em>
+</p>
 
-The picture is a visual created for the output of our model showing a semi accurate head indicator in this picture from dataset 1.  
+The picture is a visual created for the output of our model showing a semi accurate head indicator in this picture from dataset 1.
 
-	We attempted to create many models with different numbers of layers, hyperparameters, and dropouts, but landed on the model below as our final. We go into detail in the approach section of what this model does, but the general idea is to give an output with accuracy metrics and binary cross entropy loss.
+Our final [model](#model) achieved a training and validation accuracy of 0.96 and 0.94 respectively which is much higher than pre-existing models' accuracy metrics and was determined to be not overfit as the validation accuracy was so high as well. The pre-existing MobileNetV2 model came out to similar 0.96 training and a 0.95 validation accuracy. This meant that both our model and the pre-existing model perform great on identifying heads and we could test them on samples from our original trained on dataset [[6]](#6) as well as another augmented dataset [[7]](#7) to verify that the models are also generalizable and determine if there is any value to continuing work on our model for model Valorant identification tasks.
 
-Our final model (as shown in [Method](#Method)) achieved a training and validation accuracy of 0.96 and 0.94 respectively which is much higher than pre-existing models' accuracy metrics and was determined to be not overfit as the validation accuracy was so high as well. The pre-existing MobileNetV2 model came out to similar 0.96 training and a 0.95 validation accuracy. This meant that both our model and the pre-existing model perform great on identifying heads and we could test them on samples from our original trained on dataset [[6]](#6) as well as another augmented dataset [[7]](#7) to verify that the models are also generalizable and determine if there is any value to continuing work on our model for model Valorant identification tasks.
+Here is a table comparing our Model and Pre-existing Model Test Accuracy on Dataset 1 and Dataset 2:
 
 |            | Our Model | Pre-existing Model |
 |------------|-----------|--------------------|
 | Dataset 1  | 0.9574    | 0.8857             |
 | Dataset 2  | 0.9143    | 0.8682             |
 
-**Table: Comparison of Our Model and Pre-existing Model Test Accuracy on Dataset 1 and Dataset 2**
-
-Above is a table with the testing accuracies and a few things are very evident. The pre-existing model and our model performed worse on the second dataset as expected, but not much worse meaning both are generalizable to more similar data. But our model performs on average MUCH better on test sample data than the pre-existing model. This means our approach works and would be a great step forward when trying to do more Valorant image analysis. In the future, we would love to delve deeper into what makes certain models better at head identification and how to create more complex Valorant models that can segment more than just heads.
+Evidently, the pre-existing model and our model performed worse on the second dataset as expected, but not much worse meaning both are generalizable to more similar data. But our model performs on average MUCH better on test sample data than the pre-existing model. This means our approach works and would be a great step forward when trying to do more Valorant image analysis. In the future, we would love to delve deeper into what makes certain models better at head identification and how to create more complex Valorant models that can segment more than just heads.
 
 ## Discussion and Challenges Encountered
 Reflecting on our project, we have accomplished the task of developing a Convolutional Neural Network-based classifier to identify player bodies and heads from Valorant screenshots. Through this project, we have learned valuable insights into image recognition systems and deep learning techniques. Our approach included preprocessing the dataset, designing and training a convolutional neural network model, and evaluating its performance. 
@@ -91,7 +92,7 @@ One of the major challenges we encountered was in fine-tuning the model to achie
 If we were to start over today, we would consider adopting a more systematic approach to hyperparameter tuning and model selection. Additionally, we would explore more advanced techniques in image recognition and object detection to improve the overall performance of our model. 
 
 ## References
-1.	<a name="1">X. Ge, J. Renz and P. Zhang, "Visual Detection of Unknown Objects in Video Games Using Qualitative Stability Analysis," in IEEE Transactions on Computational Intelligence and AI in Games, vol. 8, no. 2, pp. 166-177, June 2016, doi: 10.1109/TCIAIG.2015.2506741.</a>[(Source)](https://ieeexplore.ieee.org/abstract/document/7349171){: style="color: red;"}
+1.	<a name="1">X. Ge, J. Renz and P. Zhang, "Visual Detection of Unknown Objects in Video Games Using Qualitative Stability Analysis," in IEEE Transactions on Computational Intelligence and AI in Games, vol. 8, no. 2, pp. 166-177, June 2016, doi: 10.1109/TCIAIG.2015.2506741. </a>[(Source)](https://ieeexplore.ieee.org/abstract/document/7349171){: style="color: red;"}
 2.	<a name="2">M. Jung, H. Yang, and K. Min, “Improving deep object detection algorithms for game scenes,” MDPI. </a>[(Source)](https://www.mdpi.com/2079-9292/10/20/2527#:~:text=An%20interesting%20approach%20for%20improving,Pascal%20VOC%20or%20MS%20COCO){: style="color: red;"}
 3.	<a name="3">C. Erdelyi, “Using computer vision techniques to play an existing video game,” ScholarWorks. </a>[(Source)](https://scholarworks.calstate.edu/concern/theses/mg74qm41f){: style="color: red;"}
 4.	<a name="4">C. Koray, “A computer vision system for chess game tracking,” 21st Computer Vision Winter Workshop. </a>[(Source)](https://vision.fe.uni-lj.si/cvww2016/proceedings/papers/21.pdf){: style="color: red;"}
